@@ -3,13 +3,19 @@ const mongoose = require('mongoose');
 const argon2 = require("argon2");
 
 const router = express.Router();
+
+const groups = require("./groups.js");
+const Group = groups.model;
 //user schema
 const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   username: String,
   password: String,
-  groupName: String
+  group: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Group'
+  }
 });
 
 //salt and hash password
@@ -96,8 +102,7 @@ router.post('/', async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       username: req.body.username,
-      password: req.body.password,
-      groupName: req.body.groupName
+      password: req.body.password
     });
     await user.save();
     req.session.userID = user._id;

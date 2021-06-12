@@ -74,6 +74,7 @@ export default {
 					groupName: this.groupName,
         });
         this.$root.$data.user = response.data.user;
+				this.createGroup();
       } catch (error) {
         this.error = error.response.data.message;
         this.$root.$data.user = null;
@@ -95,6 +96,15 @@ export default {
         this.$root.$data.user = null;
       }
     },
+		async createGroup() {
+			try {
+				this.response = await axios.post('/api/groups', {
+					name: this.groupName,
+				});
+			} catch (error) {
+				this.error = error.response.data.message;
+			}
+		}
   }
 }
 </script>

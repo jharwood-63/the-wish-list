@@ -17,7 +17,7 @@ const wishSchema = new mongoose.Schema({
   isBought: false
 });
 
-const Wish = mongoose.model('List', wishSchema);
+const Wish = mongoose.model('Wish', wishSchema);
 
 /*API Endpoints*/
 
@@ -64,7 +64,17 @@ router.put('/:id', validUser, async (req, res) => {
     console.log(error);
     res.sendStatus(500);
   }
-})
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    let wish = await Wish.deleteOne({ _id: req.params.id });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
 
 module.exports = {
   routes: router,

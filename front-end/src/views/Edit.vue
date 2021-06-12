@@ -7,6 +7,7 @@
     <div class="wishes" v-for="wish in wishes" :key="wish.id">
       <div class="wish" v-if="edit">
         <input v-model="wish.wish" @click.prevent="selectWish(wish)">
+        <button v-on:click="deleteWish(wish)" class="delete">X</button>
       </div>
       <div class="wish" v-else>
         <p> - {{wish.wish}}</p>
@@ -23,6 +24,9 @@
     <textarea class="input" placeholder="Wish" v-model="newWish"></textarea>
     <button type="submit" class="button" @click="addWish">Add</button>
   </div>
+  <div class="buttons">
+    <router-link to="/login"><i class="fas fa-caret-square-left"></i></router-link>
+  </div>
 </div>
 </template>
 
@@ -34,7 +38,6 @@ export default {
     return {
       wishes: [],
       edit: false,
-      wish: '',
       error: '',
       newWish: '',
       findWish: null,
@@ -61,6 +64,9 @@ export default {
       }
     },
     async submitChange(wish) {
+      if (wish === null) {
+        this.edit = false;
+      }
       try {
         this.response = await axios.put("api/wishes/" + wish._id, {
           wish: wish.wish,
@@ -86,6 +92,14 @@ export default {
     },
     selectWish(wish) {
       this.findWish = wish;
+    },
+    async deleteWish(wish) {
+      try {
+        this.response = await axios.delete("/api/wishes/" + wish._id);
+        this.getWishes();
+      } catch (error) {
+        this.error = error.response.data.message;
+      }
     }
   }
 }
@@ -137,5 +151,13 @@ button {
 .buttons {
   display: flex;
   justify-content: center;
+}
+
+i.fas {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
 }
 </style>
