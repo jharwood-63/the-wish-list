@@ -55,12 +55,17 @@ export default {
 			groupName: '',
       usernameLogin: '',
       passwordLogin: '',
+			findGroup: null,
       error: '',
       errorLogin: '',
     }
   },
   methods: {
     async register() {
+			this.checkGroup();
+			if (!this.findGroup) {
+				this.createGroup();
+			}
       this.error = '';
       this.errorLogin = '';
       if (!this.firstName || !this.lastName || !this.username || !this.password || !this.groupName)
@@ -71,10 +76,10 @@ export default {
           lastName: this.lastName,
           username: this.username,
           password: this.password,
-					groupName: this.groupName,
+					group: this.findGroup,
         });
         this.$root.$data.user = response.data.user;
-				this.createGroup();
+				//this.createGroup();
       } catch (error) {
         this.error = error.response.data.message;
         this.$root.$data.user = null;
@@ -96,11 +101,21 @@ export default {
         this.$root.$data.user = null;
       }
     },
+		async checkGroup() {
+			try {
+				this.response = await axios.get('/api/groups/' + this.groupName);
+				//console.log(this.response.data);
+				this.findGroup = this.response.data;
+			} catch (error) {
+				this.error = error.response.data.message;
+			}
+		},
 		async createGroup() {
 			try {
 				this.response = await axios.post('/api/groups', {
 					name: this.groupName,
 				});
+				this.checkGroup();
 			} catch (error) {
 				this.error = error.response.data.message;
 			}

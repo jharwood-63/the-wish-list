@@ -2,11 +2,11 @@ const express = require("express");
 const mongoose = require('mongoose');
 
 const router = express.Router();
-
+/*
 const users = require("./users.js");
 const User = users.model;
 const validUser = users.valid;
-
+*/
 const groupSchema = new mongoose.Schema({
   name: String
 });
@@ -28,14 +28,17 @@ router.post('/', async (req, res) => {
 });
 
 //check if group already exists
-router.get('/', async (req, res) => {
+router.get('/:name', async (req, res) => {
+  //console.log(req.params.name);
   try {
     let group = await Group.findOne({ _name: req.params.name });
-    if (!group) {
-      
-    }
+    console.log("Group" + group);
+    return res.send(group);
+  } catch {
+    console.log(error);
+    return res.sendStatus(500);
   }
-})
+});
 
 module.exports = {
   routes: router,

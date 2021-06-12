@@ -84,9 +84,9 @@ const validUser = async (req, res, next) => {
 
 // create a new user
 router.post('/', async (req, res) => {
-  if (!req.body.firstName || !req.body.lastName || !req.body.username || !req.body.password || !req.body.groupName)
+  if (!req.body.firstName || !req.body.lastName || !req.body.username || !req.body.password)
     return res.status(400).send({
-      message: "first name, last name, username, password, group name are required"
+      message: "first name, last name, username, and password are required"
     });
 
   try {
@@ -102,7 +102,8 @@ router.post('/', async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      group: req.body.group
     });
     await user.save();
     req.session.userID = user._id;
