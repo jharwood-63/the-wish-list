@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
 router.get('/:name', async (req, res) => {
   //console.log(req.params.name);
   try {
-    let group = await Group.findOne({ _name: req.params.name });
+    let group = await Group.findOne({ name: req.params.name });
     console.log("Group" + group);
     return res.send(group);
   } catch {

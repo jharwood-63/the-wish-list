@@ -34,7 +34,7 @@ app.use("/api/users", users.routes);
 const wishes = require("./wishes.js");
 app.use("/api/wishes", wishes.routes);
 
-const groups = require("./groups.js");
-app.use("/api/groups", groups.routes);
+//const groups = require("./groups.js");
+//app.use("/api/groups", groups.routes);
 
 app.listen(3002, () => console.log('Server listening on port 3002!'));
