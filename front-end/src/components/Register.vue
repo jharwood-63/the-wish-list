@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     async register() {
-		/*
+			/* Future updates
 			this.findGroup = this.checkGroup();
 			if (this.findGroup === null) {
 				this.findGroup = this.createGroup();

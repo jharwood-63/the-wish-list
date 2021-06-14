@@ -12,7 +12,7 @@
     <section class="wish-list">
       <div class="list" v-for="wish in wishes" :key="wish.id">
         <div class="wish">
-          <p> - {{wish.wish}}</p>
+          <a :href=wish.link target="_blank">{{wish.wish}}</a>
         </div>
       </div>
     </section>

@@ -7,11 +7,13 @@
     <div class="wishes" v-for="wish in wishes" :key="wish.id">
       <div class="wish" v-if="edit">
         <input v-model="wish.wish" @click.prevent="selectWish(wish)">
+        <input v-model="wish.link" @click.prevent="selectWish(wish)">
         <button v-on:click="deleteWish(wish)" class="delete">X</button>
       </div>
       <div class="wish" v-else>
-        <p> - {{wish.wish}}</p>
+        <a :href=wish.link target="_blank">{{wish.wish}}</a>
       </div>
+      <p> ----- </p>
     </div>
     <div class="buttons" v-if="edit">
       <button type="submit" class="button" @click.prevent="submitChange(findWish)">Submit</button>
@@ -21,7 +23,8 @@
     </div>
   </section>
   <div class="add">
-    <textarea class="input" placeholder="Wish" v-model="newWish"></textarea>
+    <input placeholder="Wish" v-model="newWish">
+    <input placeholder="Link" v-model="newLink">
     <button type="submit" class="button" @click="addWish">Add</button>
   </div>
   <div class="buttons">
@@ -40,6 +43,7 @@ export default {
       edit: false,
       error: '',
       newWish: '',
+      newLink: '',
       findWish: null,
     }
   },
@@ -70,6 +74,7 @@ export default {
       try {
         this.response = await axios.put("api/wishes/" + wish._id, {
           wish: wish.wish,
+          link: wish.link,
         });
         this.findWish = null;
         this.edit = false;
@@ -79,11 +84,12 @@ export default {
       }
     },
     async addWish() {
-      if (!this.newWish)
+      if (!this.newWish || !this.newLink)
         return;
       try {
         this.response = await axios.post("/api/wishes", {
           wish: this.newWish,
+          link: this.newLink,
         });
         this.getWishes();
       } catch (error) {
@@ -113,21 +119,16 @@ h2 {
 }
 
 .wishes {
-  bottom: 20px;
   width: 100%;
   text-align: center;
   color: #ecf0f1;
   font-family: 'Cherry Swash',cursive;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .wish {
   display: flex;
   justify-content: center;
-}
-
-p {
-  margin-right: 20px;
 }
 
 .add {
@@ -138,13 +139,10 @@ p {
 
 button {
   text-transform: uppercase;
-  width: 10%;
   color: #fff;
-  display: block;
   border: none;
   padding: 15px 20px;
   border-radius: 25px;
-  background: rgba(255,255,255,.1);
   background: #1161ee;
 }
 

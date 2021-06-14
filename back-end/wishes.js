@@ -13,6 +13,7 @@ const wishSchema = new mongoose.Schema({
     ref: 'User'
   },
   wish: String,
+  link: String,
   isCalledFor: false,
   isBought: false
 });
@@ -26,6 +27,7 @@ router.post('/', validUser, async (req, res) => {
   const wish = new Wish({
     user: req.user,
     wish: req.body.wish,
+    link: req.body.link,
     isCalledFor: false,
     isBought: false
   });
@@ -58,6 +60,7 @@ router.put('/:id', validUser, async (req, res) => {
   try {
     let wish = await Wish.findOne({ _id: req.params.id });
     wish.wish = req.body.wish;
+    wish.link = req.body.link;
     wish.save();
     res.sendStatus(200);
   } catch (error) {
