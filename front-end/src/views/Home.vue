@@ -45,6 +45,7 @@
         <router-link to="/login">here</router-link>
       </strong>
     </p>
+    <a href="https://github.com/jharwood-63/the-wish-list" target="_blank">GitHub -- 17 Hours</a>
   </div>
 </template>
 

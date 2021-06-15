@@ -10,9 +10,6 @@
     </header>
     <router-view />
     <footer id="footer" v-if="user">
-      <div class="greeting">
-        <h2>Welcome, {{user.firstName}}  {{user.lastName}}! </h2>
-      </div>
       <div class="buttons">
         <button type="submit" class="button-log" @click.prevent="logout">Logout</button>
       </div>

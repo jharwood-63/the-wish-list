@@ -1,7 +1,7 @@
 <template>
 <div class="main">
   <div>
-    <h1>Your Wish List</h1>
+    <h1>{{user.firstName}} {{user.lastName}}'s Wish List</h1>
     <section class="wish-list">
       <div class="list" v-for="wish in wishes" :key="wish.id">
         <div class="wish">
