@@ -14,7 +14,7 @@
         <h2>Welcome, {{user.firstName}}  {{user.lastName}}! </h2>
       </div>
       <div class="buttons">
-        <button type="submit" class="button" @click.prevent="logout">Logout</button>
+        <button type="submit" class="button-log" @click.prevent="logout">Logout</button>
       </div>
     </footer>
   </div>
@@ -135,5 +135,16 @@ h1 {
 
 span {
     color: #2BD6B4;
+}
+
+/*Responsive Design*/
+
+@media only screen and (max-width: 767px) {
+  .button-log {
+    padding-right: 65px;
+  }
+  body {
+    background-color: #265077;
+  }
 }
 </style>

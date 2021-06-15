@@ -8,7 +8,7 @@
       <div class="wish-edit" v-if="edit">
         <div class="lines-edit"></div>
         <div class="edit-input">
-          <input v-model="wish.wish" @click.prevent="selectWish(wish)">
+          <input class="input-wish" v-model="wish.wish" @click.prevent="selectWish(wish)">
           <input class="url" v-model="wish.link" @click.prevent="selectWish(wish)">
         </div>
         <button v-on:click="deleteWish(wish)" class="delete">X</button>
@@ -20,15 +20,15 @@
     </div>
   </section>
   <div class="buttons" v-if="edit">
-    <button type="submit" class="button" @click.prevent="submitChange(findWish)">Submit</button>
+    <button type="submit" class="button-sub" @click.prevent="submitChange(findWish)">Submit</button>
   </div>
   <div class="buttons" v-else>
-    <button type="submit" class="button" @click.prevent="toggleEdit">Edit</button>
+    <button type="submit" class="button-edit" @click.prevent="toggleEdit">Edit</button>
   </div>
   <div class="add">
-    <input placeholder="Wish" onfocus="this.value=''" v-model="newWish">
-    <input placeholder="Link" onfocus="this.value=''" v-model="newLink">
-    <button type="submit" class="button" @click="addWish">Add</button>
+    <input class="add-wish" placeholder="Wish" onfocus="this.value=''" v-model="newWish">
+    <input class="add-wish" placeholder="Link" onfocus="this.value=''" v-model="newLink">
+    <button type="submit" class="button-add" @click="addWish">Add</button>
   </div>
   <div class="buttons">
     <router-link to="/login"><i class="fas fa-caret-square-left"></i></router-link>
@@ -127,6 +127,7 @@ h2 {
 
 .delete {
   height: 50%;
+  padding-right: 30px;
 }
 
 .wish-edit {
@@ -143,7 +144,7 @@ h2 {
   float: left;
 }
 
-.edit-wish {
+.wishes {
   background-color: #f5f5f5;
   width: 460px;
   margin: 0 auto;
@@ -216,5 +217,31 @@ a {
 
 a:hover {
   color: red;
+}
+
+/*Responsive Design*/
+
+@media only screen and (max-width: 767px) {
+  .wish-list, .wish, .wish-edit, .wishes, .input-wish, .url {
+    width: 300px;
+  }
+  .lines-edit {
+    margin-left: 10px;
+  }
+  .input-wish {
+    width: 200px;
+  }
+  .url {
+    width: 200px;
+  }
+  .add-wish {
+    width: 100px;
+  }
+  .button-sub {
+    padding-right: 60px;
+  }
+  .button-add, .button-edit {
+    padding-right: 40px;
+  }
 }
 </style>

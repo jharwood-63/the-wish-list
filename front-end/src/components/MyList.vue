@@ -12,6 +12,10 @@
     </section>
   </div>
   <router-link to="/edit"><i class="fas fa-edit"></i></router-link>
+  <h2>
+    If you are new to <strong>The Wish List</strong>, take a look at our tutorial
+    <router-link to="/">here</router-link>
+  </h2>
   <p v-if="error">{{error}}</p>
 </div>
 </template>
@@ -78,7 +82,7 @@ i.fas{
   font-size: 28px;
 }
 
-.wish-list {
+.list {
   background-color: #f5f5f5;
   width: 500px;
   margin: 0 auto;
@@ -114,5 +118,16 @@ a {
 
 a:hover {
   color: red;
+}
+
+/*Responsive Design*/
+
+@media only screen and (max-width: 767px) {
+  .list {
+    width: 300px;
+  }
+  .wish {
+    width: 300px;
+  }
 }
 </style>
