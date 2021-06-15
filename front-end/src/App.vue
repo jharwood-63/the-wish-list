@@ -9,13 +9,63 @@
       </nav>
     </header>
     <router-view />
+    <footer id="footer" v-if="user">
+      <div class="greeting">
+        <h2>Welcome, {{user.firstName}}  {{user.lastName}}! </h2>
+      </div>
+      <div class="buttons">
+        <button type="submit" class="button" @click.prevent="logout">Logout</button>
+      </div>
+    </footer>
   </div>
 </template>
 
+<script>
+import axios from 'axios';
+export default {
+  name: 'App',
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    }
+  },
+  methods: {
+    async logout() {
+      try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
+    },
+  },
+}
+</script>
+
 <style>
+h2 {
+  margin-top: 45px;
+  text-align: center;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  text-transform: uppercase;
+  width: 10%;
+  color: #fff;
+  display: block;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  background: rgba(255,255,255,.1);
+  background: #1161ee;
+}
+
 nav {
 	margin: 27px auto 0;
-
 	position: relative;
 	width: 210px;
 	height: 50px;
@@ -23,6 +73,7 @@ nav {
 	border-radius: 8px;
 	font-size: 0;
 }
+
 nav a {
 	line-height: 50px;
 	height: 100%;
@@ -36,6 +87,7 @@ nav a {
 	color: white;
 	cursor: pointer;
 }
+
 nav .animation {
 	position: absolute;
 	height: 100%;
@@ -44,17 +96,21 @@ nav .animation {
 	transition: all .5s ease 0s;
 	border-radius: 8px;
 }
+
 a:nth-child(1) {
 	width: 100px;
 }
+
 a:nth-child(2) {
 	width: 110px;
 }
+
 nav .start-home, a:nth-child(1):hover~.animation {
 	width: 100px;
 	left: 0;
 	background-color: #2D5F5D;
 }
+
 nav .start-about, a:nth-child(2):hover~.animation {
 	width: 110px;
 	left: 100px;
@@ -66,6 +122,7 @@ body {
 	font-family: sans-serif;
 	background: url(https://www.teahub.io/photos/full/125-1253801_website-background.png) no-repeat center;
 }
+
 h1 {
 	text-align: center;
 	margin: 40px 0 40px;

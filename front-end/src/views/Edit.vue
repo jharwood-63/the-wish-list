@@ -1,14 +1,16 @@
 <template>
 <div>
   <div class="header">
-    <h2>My Wish List</h2>
+    <h1>Edit Your List</h1>
   </div>
   <section class="edit-wish">
     <div class="wishes" v-for="wish in wishes" :key="wish.id">
-      <div class="wish" v-if="edit">
+      <div class="wish-edit" v-if="edit">
         <div class="lines-edit"></div>
-        <input v-model="wish.wish" @click.prevent="selectWish(wish)">
-        <input class="url" v-model="wish.link" @click.prevent="selectWish(wish)">
+        <div class="edit-input">
+          <input v-model="wish.wish" @click.prevent="selectWish(wish)">
+          <input class="url" v-model="wish.link" @click.prevent="selectWish(wish)">
+        </div>
         <button v-on:click="deleteWish(wish)" class="delete">X</button>
       </div>
       <div class="wish" v-else>
@@ -121,12 +123,29 @@ h2 {
 
 .url {
   margin-left: 25px;
-  margin-right: 20px;
+}
+
+.delete {
+  height: 50%;
+}
+
+.wish-edit {
+  display: flex;
+  color: #555;
+  font-size: 22px;
+  padding: 0 !important;
+  width: 450px;
+  font-family: courier, monospace;
+  border: 1px solid #dedede;
+}
+
+.edit-input {
+  float: left;
 }
 
 .edit-wish {
   background-color: #f5f5f5;
-  width: 500px;
+  width: 460px;
   margin: 0 auto;
   padding: 0;
   border-bottom: 1px dotted #ccc;
@@ -139,7 +158,7 @@ h2 {
   color: #555;
   font-size: 22px;
   padding: 0 !important;
-  width: 500px;
+  width: 460px;
   font-family: courier, monospace;
   border: 1px solid #dedede;
 }
@@ -186,7 +205,7 @@ i.fas {
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  color: white;
+  color: red;
   font-size: 28px;
 }
 

@@ -1,11 +1,5 @@
 <template>
 <div class="main">
-  <div class="greeting">
-    <h2>Welcome, {{user.firstName}}  {{user.lastName}}! </h2>
-  </div>
-  <div class="buttons">
-    <button type="submit" class="button" @click.prevent="logout">Logout</button>
-  </div>
   <div>
     <h1>Your Wish List</h1>
     <section class="wish-list">
@@ -42,14 +36,6 @@ export default {
     this.getWishes();
   },
   methods: {
-    async logout() {
-      try {
-        await axios.delete("/api/users");
-        this.$root.$data.user = null;
-      } catch (error) {
-        this.$root.$data.user = null;
-      }
-    },
     async getWishes() {
       try {
         this.response = await axios.get("/api/wishes");
@@ -88,7 +74,7 @@ button {
 i.fas{
   display: flex;
   justify-content: center;
-  color: white;
+  color: red;
   font-size: 28px;
 }
 
