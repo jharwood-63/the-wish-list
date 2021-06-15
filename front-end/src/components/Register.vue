@@ -14,6 +14,7 @@
 				<div class="group">
 					<input type="submit" class="button" value="Sign In" @click.prevent="login">
 				</div>
+				<p v-if="errorLogin" class="error">{{errorLogin}}</p>
         <div class="hr"></div>
 			</div>
 			<div class="sign-up-htm">
@@ -29,12 +30,13 @@
 				<div class="group">
 					<input class="input" type="password" placeholder="Password" v-model="password">
 				</div>
-				<div class="group">
-					<input class="input" placeholder="Group Name" v-model="groupName">
-        </div>
+				<!-- <div class="group"> -->
+					<!-- <input class="input" placeholder="Group Name" v-model="groupName"> -->
+        <!-- </div> -->
 				<div class="group">
 					<input type="submit" class="button" value="Sign Up" @click.prevent="register">
 				</div>
+				<p v-if="error" class="error">{{error}}</p>
 				<div class="hr"></div>
 			</div>
 		</div>
@@ -52,7 +54,7 @@ export default {
       lastName: '',
       username: '',
       password: '',
-			groupName: '',
+			//groupName: '',
       usernameLogin: '',
       passwordLogin: '',
 			//findGroup: null,
@@ -70,7 +72,7 @@ export default {
 			*/
       this.error = '';
       this.errorLogin = '';
-      if (!this.firstName || !this.lastName || !this.username || !this.password || !this.groupName)
+      if (!this.firstName || !this.lastName || !this.username || !this.password/* || !this.groupName*/)
         return;
       try {
         let response = await axios.post('/api/users', {
@@ -78,7 +80,7 @@ export default {
           lastName: this.lastName,
           username: this.username,
           password: this.password,
-					groupName: this.groupName,
+					//groupName: this.groupName,
         });
         this.$root.$data.user = response.data.user;
       } catch (error) {
@@ -102,7 +104,7 @@ export default {
         this.$root.$data.user = null;
       }
     },
-		/*
+		/* Future Updates
 		async checkGroup() {
 			try {
 				this.response = await axios.get('/api/groups/' + this.groupName);
@@ -144,7 +146,7 @@ a{color:inherit;text-decoration:none}
 	width:100%;
 	margin:auto;
 	max-width:525px;
-	min-height:670px;
+	min-height:500px;
 	position:relative;
 	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
@@ -279,10 +281,16 @@ a{color:inherit;text-decoration:none}
 .foot-lnk{
 	text-align:center;
 }
-/*
-h2 {
-	text-align: center;
-	color: #FFFFFF;
+
+.error {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+	display: inline;
+	padding: 5px 20px;
+	border-radius: 30px;
+	font-size: 10px;
+	background-color: #d9534f;
+	color: #fff;
 }
-*/
 </style>

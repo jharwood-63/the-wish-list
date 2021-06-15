@@ -1,17 +1,17 @@
 <template>
 <div class="main">
   <div class="greeting">
-    <h2>Merry Christmas, {{user.firstName}}  {{user.lastName}} </h2>
-    <h2>Member of Group: {{user.groupName}} </h2>
+    <h2>Welcome, {{user.firstName}}  {{user.lastName}}! </h2>
   </div>
   <div class="buttons">
     <button type="submit" class="button" @click.prevent="logout">Logout</button>
   </div>
   <div>
-    <h2>Your Wish List</h2>
+    <h1>Your Wish List</h1>
     <section class="wish-list">
       <div class="list" v-for="wish in wishes" :key="wish.id">
         <div class="wish">
+          <div class="lines"></div>
           <a :href=wish.link target="_blank">{{wish.wish}}</a>
         </div>
       </div>
@@ -92,15 +92,41 @@ i.fas{
   font-size: 28px;
 }
 
+.wish-list {
+  background-color: #f5f5f5;
+  width: 500px;
+  margin: 0 auto;
+  padding: 0;
+  border-bottom: 1px dotted #ccc;
+  text-indent: 25px;
+  height: auto;
+  padding: 10px;
+  text-transform: capitalize;
+}
 .wish {
-  display: flex;
-  justify-content: center;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
-  color: #ecf0f1;
-  font-family: 'Cherry Swash',cursive;
-  font-size: 16px;
+  color: #555;
+  font-size: 22px;
+  padding: 0 !important;
+  width: 500px;
+  font-family: courier, monospace;
+  border: 1px solid #dedede;
 }
 
+.lines {
+  border-left: 1px solid #ffaa9f;
+  border-right: 1px solid #ffaa9f;
+  width: 2px;
+  float: left;
+  height: 26px;
+  margin-left: 40px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+}
 </style>

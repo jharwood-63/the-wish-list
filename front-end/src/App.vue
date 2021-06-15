@@ -19,7 +19,7 @@ nav {
 	position: relative;
 	width: 210px;
 	height: 50px;
-	background-color: #34495e;
+	background-color: #022140;
 	border-radius: 8px;
 	font-size: 0;
 }
@@ -53,18 +53,18 @@ a:nth-child(2) {
 nav .start-home, a:nth-child(1):hover~.animation {
 	width: 100px;
 	left: 0;
-	background-color: #1abc9c;
+	background-color: #2D5F5D;
 }
 nav .start-about, a:nth-child(2):hover~.animation {
 	width: 110px;
 	left: 100px;
-	background-color: #e74c3c;
+	background-color: #494B68;
 }
 
 body {
 	font-size: 12px;
 	font-family: sans-serif;
-	background: #2c3e50;
+	background: url(https://www.teahub.io/photos/full/125-1253801_website-background.png) no-repeat center;
 }
 h1 {
 	text-align: center;
@@ -78,9 +78,5 @@ h1 {
 
 span {
     color: #2BD6B4;
-}
-
-router-view {
-  display: none;
 }
 </style>

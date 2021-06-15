@@ -11,8 +11,8 @@ const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   username: String,
-  password: String,
-  groupName: String
+  password: String
+  //groupName: String
 });
 
 //salt and hash password
@@ -81,9 +81,9 @@ const validUser = async (req, res, next) => {
 
 // create a new user
 router.post('/', async (req, res) => {
-  if (!req.body.firstName || !req.body.lastName || !req.body.username || !req.body.password || !req.body.groupName)
+  if (!req.body.firstName || !req.body.lastName || !req.body.username || !req.body.password/* || !req.body.groupName*/)
     return res.status(400).send({
-      message: "first name, last name, username, password, and group name are required"
+      message: "first name, last name, username, and password are required"
     });
 
   try {
@@ -100,7 +100,7 @@ router.post('/', async (req, res) => {
       lastName: req.body.lastName,
       username: req.body.username,
       password: req.body.password,
-      groupName: req.body.groupName
+      //groupName: req.body.groupName
     });
     await user.save();
     req.session.userID = user._id;

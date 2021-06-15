@@ -6,25 +6,26 @@
   <section class="edit-wish">
     <div class="wishes" v-for="wish in wishes" :key="wish.id">
       <div class="wish" v-if="edit">
+        <div class="lines-edit"></div>
         <input v-model="wish.wish" @click.prevent="selectWish(wish)">
-        <input v-model="wish.link" @click.prevent="selectWish(wish)">
+        <input class="url" v-model="wish.link" @click.prevent="selectWish(wish)">
         <button v-on:click="deleteWish(wish)" class="delete">X</button>
       </div>
       <div class="wish" v-else>
+        <div class="lines"></div>
         <a :href=wish.link target="_blank">{{wish.wish}}</a>
       </div>
-      <p> ----- </p>
-    </div>
-    <div class="buttons" v-if="edit">
-      <button type="submit" class="button" @click.prevent="submitChange(findWish)">Submit</button>
-    </div>
-    <div class="buttons" v-else>
-      <button type="submit" class="button" @click.prevent="toggleEdit">Edit</button>
     </div>
   </section>
+  <div class="buttons" v-if="edit">
+    <button type="submit" class="button" @click.prevent="submitChange(findWish)">Submit</button>
+  </div>
+  <div class="buttons" v-else>
+    <button type="submit" class="button" @click.prevent="toggleEdit">Edit</button>
+  </div>
   <div class="add">
-    <input placeholder="Wish" v-model="newWish">
-    <input placeholder="Link" v-model="newLink">
+    <input placeholder="Wish" onfocus="this.value=''" v-model="newWish">
+    <input placeholder="Link" onfocus="this.value=''" v-model="newLink">
     <button type="submit" class="button" @click="addWish">Add</button>
   </div>
   <div class="buttons">
@@ -118,17 +119,47 @@ h2 {
   color: white;
 }
 
-.wishes {
-  width: 100%;
-  text-align: center;
-  color: #ecf0f1;
-  font-family: 'Cherry Swash',cursive;
-  font-size: 20px;
+.url {
+  margin-left: 25px;
+  margin-right: 20px;
 }
 
+.edit-wish {
+  background-color: #f5f5f5;
+  width: 500px;
+  margin: 0 auto;
+  padding: 0;
+  border-bottom: 1px dotted #ccc;
+  text-indent: 25px;
+  height: auto;
+  padding: 10px;
+  text-transform: capitalize;
+}
 .wish {
-  display: flex;
-  justify-content: center;
+  color: #555;
+  font-size: 22px;
+  padding: 0 !important;
+  width: 500px;
+  font-family: courier, monospace;
+  border: 1px solid #dedede;
+}
+
+.lines {
+  border-left: 1px solid #ffaa9f;
+  border-right: 1px solid #ffaa9f;
+  width: 2px;
+  float: left;
+  height: 26px;
+  margin-left: 40px;
+}
+
+.lines-edit {
+  border-left: 1px solid #ffaa9f;
+  border-right: 1px solid #ffaa9f;
+  width: 2px;
+  float: left;
+  height: 87px;
+  margin-left: 40px;
 }
 
 .add {
@@ -157,5 +188,14 @@ i.fas {
   justify-content: center;
   color: white;
   font-size: 28px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
 }
 </style>
