@@ -1,0 +1,6 @@
+//Horizontal menu
+https://codepen.io/Patak/pen/QpLpOV/
+//Login/Signup page
+https://codepen.io/khadkamhn/pen/ZGvPLo
+//Paper Style
+https://css-tricks.com/how-to-create-a-notebook-design-with-css/
